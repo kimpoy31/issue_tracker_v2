@@ -2,7 +2,9 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import '@radix-ui/themes/styles.css';
-import { Theme } from '@radix-ui/themes';
+import { Container, Theme } from '@radix-ui/themes';
+import Navbar from './Navbar/Navbar';
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -14,9 +16,14 @@ export default function RootLayout({children,}: {children: React.ReactNode}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <Theme >
+        <Theme accentColor='crimson' appearance='dark'>
 
-          {children}
+          <Navbar />
+
+          <Container px={{initial:"2", sm:"6",}}>
+            {children}
+          </Container>
+          
           
         </Theme>
       </body>
