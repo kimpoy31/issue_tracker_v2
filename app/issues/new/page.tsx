@@ -1,8 +1,9 @@
 "use client"
 
-// Styling 
+// Styling & imports
 import React from 'react'
-import { Box, Button, Callout, Text, TextField } from '@radix-ui/themes'
+import { Box, Button, Text, TextField } from '@radix-ui/themes'
+import ErrorMessage from '@/app/components/ErrorMessage';
 
 // MDE
 import SimpleMDE from "react-simplemde-editor";
@@ -13,7 +14,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, Controller } from 'react-hook-form';
 import { IssueTypeSchema } from '../IssueType';
-import ErrorCallout from '@/app/components/ErrorCallout';
+
 
 type IssueSchema = z.infer<typeof IssueTypeSchema>
 
@@ -24,6 +25,8 @@ const CreateIssue = () => {
         handleSubmit, 
         formState: { errors } 
     } = useForm<IssueSchema>({ resolver: zodResolver(IssueTypeSchema) })
+
+    console.log(errors.description)
 
   return (
     <div className='flex w-full justify-center items-center'>
@@ -45,9 +48,9 @@ const CreateIssue = () => {
 
             {/* Title Error here */}
             {errors.title &&
-            <ErrorCallout>
+            <ErrorMessage>
                 {errors.title.message}
-            </ErrorCallout>
+            </ErrorMessage>
             }
             
             <Box>
@@ -60,9 +63,9 @@ const CreateIssue = () => {
             </Box>
             {/* Description Error here */}
             {errors.description &&
-                <ErrorCallout>
-                    description is required
-                </ErrorCallout>
+                <ErrorMessage>
+                    {errors.description.message}
+                </ErrorMessage>
             }
             <Button type='submit'>Submit Issue</Button>
         </form>
