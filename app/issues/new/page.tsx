@@ -1,8 +1,8 @@
 "use client"
 
 // Styling & imports
-import React from 'react'
-import { Box, Button, Text, TextField } from '@radix-ui/themes'
+import React, { useState } from 'react'
+import { Box, Button, Callout, Text, TextField } from '@radix-ui/themes'
 import ErrorMessage from '@/app/components/ErrorMessage';
 
 // MDE
@@ -15,10 +15,16 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, Controller } from 'react-hook-form';
 import { IssueTypeSchema } from '../IssueType';
 
+// API imports
+import axios, { AxiosError } from 'axios';
+import { useRouter } from 'next/navigation';
 
 type IssueSchema = z.infer<typeof IssueTypeSchema>
 
 const CreateIssue = () => {
+    const [error, setError] = useState("")
+    const router = useRouter()
+
     const { 
         register, 
         control, 
@@ -26,15 +32,38 @@ const CreateIssue = () => {
         formState: { errors } 
     } = useForm<IssueSchema>({ resolver: zodResolver(IssueTypeSchema) })
 
-    console.log(errors.description)
+    const onSubmit = async(data: IssueSchema) => {
+        try {
+            
+            const response = await axios.post("/api/issues", data)
+            router.push("/issues")
+            router.refresh()
+
+        } catch (error) {
+            
+            if(error instanceof AxiosError){
+                setError(error.message)
+            }
+
+        }
+    }
 
   return (
     <div className='flex w-full justify-center items-center'>
 
         <form 
             className='w-full max-w-2xl space-y-2'
-            onSubmit={handleSubmit((data) => console.log(data))}
+            onSubmit={handleSubmit((data) => onSubmit(data))}
         >
+            {/* Api POST ERROR */}
+            {error &&
+                <Callout.Root color='red' variant='surface'>
+                    <Callout.Text>
+                        {error}
+                    </Callout.Text>
+                </Callout.Root>
+            }
+           
             <Box>
                 <Text>Title:</Text>
                 <TextField.Root>
