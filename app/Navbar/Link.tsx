@@ -14,7 +14,7 @@ const Link = ({label, href}: Props) => {
 
   return (
     <NextLink href={href} passHref legacyBehavior>
-        <RadixLink color={`${currentPath === href ? "teal" : "gray"}`}>{label}</RadixLink>
+        <RadixLink color={`${currentPath === href ? "iris" : "gray"}`}>{label}</RadixLink>
     </NextLink>
   )
 }

@@ -1,4 +1,4 @@
-import { Box, Button, Container, Flex, Heading, Text } from '@radix-ui/themes'
+import { Box, Button, Container, Flex, Heading, Tabs, Text } from '@radix-ui/themes'
 import React from 'react'
 import NavLink from "./Link"
 import { FaBug } from "react-icons/fa6";

@@ -90,6 +90,7 @@ const CreateIssue = () => {
                     render={({field}) => <SimpleMDE {...field}/>}
                 />
             </Box>
+            
             {/* Description Error here */}
             {errors.description &&
                 <ErrorMessage>
