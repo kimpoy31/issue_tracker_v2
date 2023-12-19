@@ -11,21 +11,18 @@ const Navbar = () => {
   ]
 
   return (
-    <Container px={{initial:"2", sm:"6",}} py="6">
-
-        <Flex align={"center"} >
-            <Flex gap="4" height="4" align="center">
+    <div className='px-1 md:px-16'>
+        <div className='flex'>
+            <div className='flex gap-4 h-16 items-center'>
                 <Link href={"/"} className='p-2 hover:brightness-75'>
                   <FaBug size="20" />
                 </Link>
-                <Flex gap={"2"}>
+                <div className='flex gap-2'>
                   {links.map((link, index) => <NavLink key={index} label={link.label} href={link.href} /> )}
-                </Flex>
-            </Flex>
-        </Flex>
-        
-        
-    </Container>
+                </div>
+            </div>
+        </div>  
+    </div>
   )
 }
 

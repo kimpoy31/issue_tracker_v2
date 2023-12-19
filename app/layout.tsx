@@ -20,10 +20,9 @@ export default function RootLayout({children,}: {children: React.ReactNode}) {
 
           <Navbar />
 
-          <Container px={{initial:"2", sm:"6",}}>
+          <div className='px-1 md:px-16'>
             {children}
-          </Container>
-          
+          </div>
           
         </Theme>
       </body>

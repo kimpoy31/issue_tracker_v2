@@ -1,4 +1,4 @@
-import { Button, Table } from '@radix-ui/themes'
+import { Button, Flex, Table } from '@radix-ui/themes'
 import Link from 'next/link'
 import React from 'react'
 import { FaPlus } from "react-icons/fa6";
@@ -27,7 +27,6 @@ const IssuesPage = async() => {
             {issues.map(issue => <TableRowLink key={issue.id} issue={issue} /> )}
           </Table.Body>
         </Table.Root>
-         
     </div>
   )
 }

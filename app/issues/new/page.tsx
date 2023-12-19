@@ -2,7 +2,7 @@
 
 // Styling & imports
 import React, { useState } from 'react'
-import { Box, Button, Callout, Text, TextField } from '@radix-ui/themes'
+import { Box, Button, Callout, Flex, Text, TextField } from '@radix-ui/themes'
 import ErrorMessage from '@/app/components/ErrorMessage';
 
 // MDE
@@ -49,7 +49,7 @@ const CreateIssue = () => {
     }
 
   return (
-    <div className='flex w-full justify-center items-center'>
+    <div className='w-full flex justify-center'>
 
         <form 
             className='w-full max-w-2xl space-y-2'
@@ -64,7 +64,7 @@ const CreateIssue = () => {
                 </Callout.Root>
             }
            
-            <Box>
+            <div>
                 <Text>Title:</Text>
                 <TextField.Root>
                     <TextField.Input 
@@ -73,7 +73,7 @@ const CreateIssue = () => {
                         {...register("title")}
                     />
                 </TextField.Root>
-            </Box>
+            </div>
 
             {/* Title Error here */}
             {errors.title &&
@@ -82,14 +82,14 @@ const CreateIssue = () => {
             </ErrorMessage>
             }
             
-            <Box>
+            <div>
                 <Text>Description:</Text>
                 <Controller 
                     name='description'
                     control={control}
                     render={({field}) => <SimpleMDE {...field}/>}
                 />
-            </Box>
+            </div>
             
             {/* Description Error here */}
             {errors.description &&
