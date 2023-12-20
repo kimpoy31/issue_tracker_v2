@@ -2,8 +2,8 @@
 
 // Styling & imports
 import React, { useState } from 'react'
-import { Box, Button, Callout, Flex, Text, TextField } from '@radix-ui/themes'
-import ErrorMessage from '@/app/components/ErrorMessage';
+import { Button, Callout, Text, TextField } from '@radix-ui/themes'
+import { ErrorMessage } from '@/app/components/index';
 
 // MDE
 import SimpleMDE from "react-simplemde-editor";
