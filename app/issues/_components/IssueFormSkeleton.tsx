@@ -1,6 +1,6 @@
-import { Text } from '@radix-ui/themes'
 import React from 'react'
 import { Skeleton } from "@/app/components/index"
+import { Text } from '@radix-ui/themes'
 
 const IssueFormSkeleton = () => {
   return (

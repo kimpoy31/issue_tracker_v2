@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 import { FaPlus } from "react-icons/fa6";
 import prisma from '@/prisma/client';
-import TableRowLink from './TableRowLink';
+import StatusBadge from './_components/Badge';
 
 const IssuesPage = async() => {
   const issues = await prisma.issue.findMany()
@@ -24,7 +24,17 @@ const IssuesPage = async() => {
           </Table.Header>
 
           <Table.Body>
-            {issues.map(issue => <TableRowLink key={issue.id} issue={issue} /> )}
+            {/* {issues.map(issue => <TableRowLink key={issue.id} issue={issue} /> )} */}
+            {issues.map(issue => 
+              <Table.Row key={issue.id}>
+                <Table.Cell>
+                  <Link href={`/issues/${issue.id}`} className='text-indigo-600 underline'>{issue.title}</Link>
+                  <div className='block md:hidden mt-1'><StatusBadge status={issue.status} /></div>
+                </Table.Cell>
+                <Table.Cell className='hidden md:table-cell'><StatusBadge status={issue.status} /></Table.Cell>
+                <Table.Cell className='hidden md:table-cell'>{issue.createdAt.toDateString()}</Table.Cell>
+              </Table.Row>
+            )}
           </Table.Body>
         </Table.Root>
     </div>
