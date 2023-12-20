@@ -2,8 +2,9 @@ import prisma from '@/prisma/client'
 import { Box, Button, Flex, Grid, Text } from '@radix-ui/themes'
 import { notFound } from 'next/navigation'
 import React from 'react'
-import Markdown from 'react-markdown'
-import StatusBadge from '../_components/Badge'
+import IssueDetails from './IssueDetails'
+import EditIssueButton from './EditIssueButton'
+import DeleteIssueButton from './DeleteIssueButton'
 
 const DetailsPage = async({ params }:{ params: { id: string } }) => {
     const issue = await prisma.issue.findUnique({
@@ -15,20 +16,15 @@ const DetailsPage = async({ params }:{ params: { id: string } }) => {
     if(!issue) notFound()
 
   return (
-    <Grid columns="2" gap="3">
-        <Box>
-            <Text size="5" trim={'both'} style={{fontWeight:"bold"}}>{issue.title}</Text>
-            <Flex gap={"2"}>
-                <StatusBadge status={issue.status} />
-                <small>{issue.createdAt.toDateString()}</small>
-            </Flex>
-            <Markdown className="prose border p-4">
-                {issue.description}
-            </Markdown>
+    <Grid columns={{initial:"1" , md:"5"}} gap="3">
+        <Box className='col-span-4'>
+            <IssueDetails issue={issue} />
         </Box>
         <Box>
-            <Button>Edit</Button>
-            <Button>Delete</Button>
+            <Flex gap={"1"} direction={"column"}>
+                <EditIssueButton />
+                <DeleteIssueButton />
+            </Flex>
         </Box>
     </Grid>
   )
