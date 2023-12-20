@@ -9,7 +9,7 @@ const EditIssueButton = ( { id } : {id: number}) => {
 
   return (
     <Button onClick={() => router.push(`/issues/${id}/edit`)}>
-      <FaEdit /> Edit Issue
+      <FaEdit /> Edit issue
     </Button>
   )
 }

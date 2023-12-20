@@ -41,9 +41,9 @@ const IssueForm = ({issue} : {issue: Issue}) => {
             setIsLoading(!isLoading)
 
             if(issue){
-                const response = await axios.patch(`/api/issues/${issue.id}`, data)
+                await axios.patch(`/api/issues/${issue.id}`, data)
             } else {
-                const response = await axios.post("/api/issues", data)
+                await axios.post("/api/issues", data)
             }
            
             setIsLoading(!isLoading)
