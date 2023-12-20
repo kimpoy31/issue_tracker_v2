@@ -11,7 +11,7 @@ const IssuesPage = async() => {
   return (
     <div className='flex flex-col gap-2'>
         <Link href={"/issues/new"}>
-            <Button size={"3"}> <FaPlus/> New Issue</Button>
+            <Button> <FaPlus/> New Issue</Button>
         </Link>
 
         <Table.Root variant="surface">
