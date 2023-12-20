@@ -14,17 +14,17 @@ const loading = () => {
         <Table.Header>
             <Table.Row>
             <Table.ColumnHeaderCell>Title</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Status</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Created at</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className='hidden md:table-cell'>Status</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className='hidden md:table-cell'>Created at</Table.ColumnHeaderCell>
             </Table.Row>
         </Table.Header>
 
         <Table.Body>
             {issues.map((issue, index) => 
                 <Table.Row key={index}>
-                    <Table.Cell><Skeleton height={"1rem"} /></Table.Cell>
-                    <Table.Cell><Skeleton height={"1rem"} /></Table.Cell>
-                    <Table.Cell><Skeleton height={"1rem"} /></Table.Cell>
+                    <Table.Cell><Skeleton className='h-8 md:h-4'/></Table.Cell>
+                    <Table.Cell className='hidden md:table-cell'><Skeleton height={"1rem"} /></Table.Cell>
+                    <Table.Cell className='hidden md:table-cell'><Skeleton height={"1rem"} /></Table.Cell>
                 </Table.Row> 
             )}
         </Table.Body>
