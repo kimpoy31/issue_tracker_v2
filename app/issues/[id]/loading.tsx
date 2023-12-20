@@ -16,7 +16,7 @@ const loading = () => {
             </Flex>
         </Box>
         <Box>
-            <Flex gap={"1"} direction={"column"}>
+            <Flex gap={"1"} direction={{initial:"row", md:"column"}}>
                 <Skeleton style={{maxWidth:"480px", width:"100%"}} height={"2rem"}/>
             </Flex>
         </Box>
