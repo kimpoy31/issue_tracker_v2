@@ -1,6 +1,6 @@
 import { Box, Flex, Grid } from '@radix-ui/themes'
 import React from 'react'
-import Skeleton from "@/app/components/Skeleton"
+import {Skeleton} from "@/app/components/index"
 
 const loading = () => {
   return (

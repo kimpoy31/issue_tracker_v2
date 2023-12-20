@@ -1,6 +1,5 @@
-import { Button, Table } from '@radix-ui/themes'
+import { Table } from '@radix-ui/themes'
 import React from 'react'
-import { FaPlus } from 'react-icons/fa6'
 import { Skeleton } from '../components/index'
 
 const loading = () => {
