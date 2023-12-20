@@ -11,7 +11,7 @@ const Navbar = () => {
   ]
 
   return (
-    <div className='px-1 md:px-16'>
+    <div className='px-1 md:px-16 mb-4'>
         <div className='flex'>
             <div className='flex gap-4 h-16 items-center'>
                 <Link href={"/"} className='p-2 hover:brightness-75'>

@@ -49,8 +49,6 @@ const CreateIssue = () => {
     }
 
   return (
-    <div className='w-full flex justify-center'>
-
         <form 
             className='w-full max-w-2xl space-y-2'
             onSubmit={handleSubmit((data) => onSubmit(data))}
@@ -99,8 +97,6 @@ const CreateIssue = () => {
             }
             <Button type='submit'>Submit Issue</Button>
         </form>
-        
-    </div>
   )
 }
 
