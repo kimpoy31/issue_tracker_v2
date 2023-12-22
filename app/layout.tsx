@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import '@radix-ui/themes/styles.css';
-import { Theme } from '@radix-ui/themes';
+import { Container, Theme } from '@radix-ui/themes';
 import Navbar from './Navbar/Navbar';
 import AuthProvider from './auth/Provider';
 import QueryClientProvider from './providers/QueryClientProvider';
@@ -24,9 +24,9 @@ export default function RootLayout({children,}: {children: React.ReactNode}) {
 
               <Navbar />
 
-              <div className='px-1 md:px-16'>
+              <Container px={{initial:"1", md:"6"}} py={"4"}>
                 {children}
-              </div>
+              </Container>
               
             </Theme>
           </AuthProvider>
