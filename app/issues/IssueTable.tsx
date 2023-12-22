@@ -1,11 +1,14 @@
-import { Table } from '@radix-ui/themes'
+import { Container, Table } from '@radix-ui/themes'
 import StatusBadge from './_components/Badge'
 import Link from 'next/link'
 import { Issue } from '@prisma/client'
+import EmptyTable from './EmptyTable'
 
 const IssueTable = ({issues}:{issues:Issue[]}) => {
   return (
-    <Table.Root variant="surface">
+    <>
+      {issues.length > 0 
+      ?<Table.Root variant="surface">
         <Table.Header>
         <Table.Row>
             <Table.ColumnHeaderCell>Title</Table.ColumnHeaderCell>
@@ -27,7 +30,13 @@ const IssueTable = ({issues}:{issues:Issue[]}) => {
             </Table.Row>
         )}
         </Table.Body>
-    </Table.Root>
+      </Table.Root>
+
+      :<Container>
+          <EmptyTable />
+      </Container>
+      }
+    </>
   )
 }
 

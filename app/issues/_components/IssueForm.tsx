@@ -111,7 +111,7 @@ const IssueForm = ({issue} : {issue: Issue}) => {
 
 
         {isLoading 
-        ? <Button disabled>{issue ? "Updating": "Creating"}<Spinner /></Button>
+        ? <Button disabled>{issue ? "Updating": "Submitting"}<Spinner /></Button>
         : issue 
             ? <Button type='submit'>Update Issue</Button> 
             : <Button type='submit'>Submit Issue</Button>
