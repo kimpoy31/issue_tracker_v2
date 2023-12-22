@@ -3,6 +3,7 @@ import React from 'react'
 import NavLink from "./Link"
 import { FaBug } from "react-icons/fa6";
 import Link from 'next/link';
+import NavActionBtn from './NavActionBtn';
 
 const Navbar = () => {
   const links = [
@@ -11,7 +12,7 @@ const Navbar = () => {
   ]
 
   return (
-    <div className='px-1 md:px-16 mb-4'>
+    <div className='px-1 md:px-16 mb-4 flex justify-between items-center'>
         <div className='flex'>
             <div className='flex gap-4 h-16 items-center'>
                 <Link href={"/"} className='p-2 hover:brightness-75'>
@@ -22,6 +23,8 @@ const Navbar = () => {
                 </div>
             </div>
         </div>  
+
+        <NavActionBtn />
     </div>
   )
 }

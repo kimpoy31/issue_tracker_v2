@@ -4,6 +4,7 @@ import './globals.css'
 import '@radix-ui/themes/styles.css';
 import { Theme } from '@radix-ui/themes';
 import Navbar from './Navbar/Navbar';
+import AuthProvider from './auth/Provider';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,15 +17,17 @@ export default function RootLayout({children,}: {children: React.ReactNode}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <Theme accentColor='iris'>
+        <AuthProvider>
+          <Theme accentColor='iris'>
 
-          <Navbar />
+            <Navbar />
 
-          <div className='px-1 md:px-16'>
-            {children}
-          </div>
-          
-        </Theme>
+            <div className='px-1 md:px-16'>
+              {children}
+            </div>
+            
+          </Theme>
+        </AuthProvider>
       </body>
     </html>
   )
