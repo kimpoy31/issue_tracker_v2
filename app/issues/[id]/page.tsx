@@ -5,7 +5,7 @@ import prisma from '@/prisma/client'
 import authOptions from '@/app/auth/authOptions'
 import { getServerSession } from 'next-auth'
 // Radixui imports
-import { Box, Button, Flex, Grid, Text } from '@radix-ui/themes'
+import { Box, Button, Container, Flex, Grid, Text } from '@radix-ui/themes'
 // Components
 import AsigneeSelectBtn from './AsigneeSelectBtn'
 import IssueDetails from './IssueDetails'
@@ -28,11 +28,14 @@ const DetailsPage = async({ params }:{ params: { id: string } }) => {
         <Box className='col-span-4'>
             <IssueDetails issue={issue} />
         </Box>
-        {session && <Box>
-            <Flex gap={"1"} direction={{initial:"row", md:"column"}}>
+        {session && 
+        <Box style={{maxWidth:"250px"}} >
+            <Flex gap={"1"} direction={"column"}>
                 <AsigneeSelectBtn />
-                <EditIssueButton id={issue.id} />
-                <DeleteIssueButton issue={issue} />
+                <Flex direction={"column"} gap={"1"}>
+                    <EditIssueButton id={issue.id} />
+                    <DeleteIssueButton issue={issue} />
+                </Flex>
             </Flex>
         </Box>}
     </Grid>
