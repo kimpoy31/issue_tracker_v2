@@ -1,6 +1,6 @@
 "use client"
 
-import { Avatar, Button, DropdownMenu, Text } from '@radix-ui/themes'
+import { Avatar, Box, Button, DropdownMenu, Text } from '@radix-ui/themes'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import React from 'react'
@@ -9,7 +9,7 @@ const NavActionBtn = () => {
     const { status , data: session } = useSession()
 
   return (
-    <div>
+    <Box>
         { status === "authenticated" && 
           // <Link href={"/api/auth/signout"}>Logout</Link>
           <DropdownMenu.Root>
@@ -31,7 +31,7 @@ const NavActionBtn = () => {
 
 
         { status === "unauthenticated" && <Link href={"/api/auth/signin"}>Login</Link>}
-    </div>
+    </Box>
   )
 }
 
