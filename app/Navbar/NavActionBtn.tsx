@@ -1,6 +1,6 @@
 "use client"
 
-import { Avatar, Box, Button, DropdownMenu, Text } from '@radix-ui/themes'
+import { Avatar, Box, Button, DropdownMenu, Flex, Text } from '@radix-ui/themes'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import React from 'react'
@@ -17,7 +17,7 @@ const NavActionBtn = () => {
           // <Link href={"/api/auth/signout"}>Logout</Link>
           <DropdownMenu.Root>
             <DropdownMenu.Trigger>
-              <Avatar src={session.user!.image!} fallback="?" size="2" radius='full' referrerPolicy='no-referrer'/>
+                <Avatar src={session.user!.image!} fallback="?" size="2" radius='full' referrerPolicy='no-referrer'/>
             </DropdownMenu.Trigger>
             <DropdownMenu.Content size="1">
               <DropdownMenu.Label>

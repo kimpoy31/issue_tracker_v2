@@ -1,13 +1,16 @@
-import prisma from '@/prisma/client'
-import { Box, Button, Flex, Grid, Text } from '@radix-ui/themes'
 import { notFound } from 'next/navigation'
 import React from 'react'
+// auth imports
+import prisma from '@/prisma/client'
+import authOptions from '@/app/auth/authOptions'
+import { getServerSession } from 'next-auth'
+// Radixui imports
+import { Box, Button, Flex, Grid, Text } from '@radix-ui/themes'
+// Components
+import AsigneeSelectBtn from './AsigneeSelectBtn'
 import IssueDetails from './IssueDetails'
 import EditIssueButton from './EditIssueButton'
 import DeleteIssueButton from './DeleteIssueButton'
-import { getServerSession } from 'next-auth'
-import authOptions from '@/app/auth/authOptions'
-import AsigneeSelectBtn from './AsigneeSelectBtn'
 
 const DetailsPage = async({ params }:{ params: { id: string } }) => {
     const session = await getServerSession(authOptions)
