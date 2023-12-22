@@ -10,22 +10,24 @@ const Navbar = () => {
     {label: "Dashboard", href:"/"},
     {label: "Issues", href:"/issues"},
   ]
-
+  // className='px-1 md:px-16 mb-4 flex justify-between items-center'
   return (
-    <div className='px-1 md:px-16 mb-4 flex justify-between items-center'>
-        <div className='flex'>
-            <div className='flex gap-4 h-16 items-center'>
+    <Container px={{initial:"1", md:"6"}} py={"4"}>
+      <Flex justify={"between"} align={"center"} >
+        <Flex>
+            <Flex gap={"2"}  align={"center"}>
                 <Link href={"/"} className='p-2 hover:brightness-75'>
                   <FaBug size="20" />
                 </Link>
-                <div className='flex gap-2'>
+                <Flex gap={"1"}>
                   {links.map((link, index) => <NavLink key={index} label={link.label} href={link.href} /> )}
-                </div>
-            </div>
-        </div>  
+                </Flex>
+            </Flex>
+        </Flex>  
 
         <NavActionBtn />
-    </div>
+      </Flex>
+    </Container>
   )
 }
 
