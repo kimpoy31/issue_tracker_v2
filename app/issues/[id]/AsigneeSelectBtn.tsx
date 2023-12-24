@@ -33,7 +33,7 @@ const AsigneeSelectBtn = ({issue}:{issue:Issue}) => {
       onValueChange={(userId) => assignIssue(userId)}
       defaultValue={issue.assignedToUserId || ""}>
           <Select.Trigger placeholder='Select Asignee...'/>
-          <Select.Content>
+          <Select.Content position="popper">
               <Select.Group>
                 <Select.Label>Users</Select.Label>
                 <Select.Item value='unassigned'>Unassigned</Select.Item>
