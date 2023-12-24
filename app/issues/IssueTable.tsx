@@ -6,9 +6,7 @@ import EmptyTable from './EmptyTable'
 
 const IssueTable = ({issues}:{issues:Issue[]}) => {
   return (
-    <>
-      {issues.length > 0 
-      ?<Table.Root variant="surface">
+      <Table.Root variant="surface">
         <Table.Header>
         <Table.Row>
             <Table.ColumnHeaderCell>Title</Table.ColumnHeaderCell>
@@ -32,11 +30,6 @@ const IssueTable = ({issues}:{issues:Issue[]}) => {
         </Table.Body>
       </Table.Root>
 
-      :<Container>
-          <EmptyTable />
-      </Container>
-      }
-    </>
   )
 }
 
