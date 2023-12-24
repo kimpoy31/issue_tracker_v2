@@ -31,7 +31,7 @@ const DetailsPage = async({ params }:{ params: { id: string } }) => {
         {session && 
         <Box style={{maxWidth:"250px"}} >
             <Flex gap={"1"} direction={"column"}>
-                <AsigneeSelectBtn />
+                <AsigneeSelectBtn issue={issue} />
                 <Flex direction={"column"} gap={"1"}>
                     <EditIssueButton id={issue.id} />
                     <DeleteIssueButton issue={issue} />

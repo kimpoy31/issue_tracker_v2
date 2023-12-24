@@ -1,13 +1,12 @@
 "use client"
 
-import { User } from '@prisma/client'
+import { Issue, User } from '@prisma/client'
 import { Avatar, Select } from '@radix-ui/themes'
 import { Skeleton } from "@/app/components/index"
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
 
-const AsigneeSelectBtn = () => {
+const AsigneeSelectBtn = ({issue}:{issue:Issue}) => {
   const {data: users, error, isLoading } = useQuery<User[]>({
     queryKey: ["users"],
     queryFn: () => axios.get("/api/users").then(res => res.data),
@@ -19,11 +18,18 @@ const AsigneeSelectBtn = () => {
   if(error) return null
 
   return (
-    <Select.Root>
+    <Select.Root 
+    onValueChange={(userId) => {
+      const assignedToUserId = userId === "unassigned" ? null : userId
+      axios.patch(`/api/issues/${issue.id}`, { assignedToUserId })
+    }}
+    defaultValue={issue.assignedToUserId || ""}
+    >
         <Select.Trigger placeholder='Select Asignee...'/>
         <Select.Content>
             <Select.Group>
               <Select.Label>Users</Select.Label>
+              <Select.Item value='unassigned'>Unassigned</Select.Item>
               {users?.map(user => 
                 <Select.Item key={user.id} value={user.id}>
                   <Avatar src={user.image!} fallback="?" size={"1"} radius='full' />{" "}{user.name}

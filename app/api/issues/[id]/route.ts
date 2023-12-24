@@ -19,6 +19,7 @@ export async function PATCH(request: NextRequest, { params }: { params: {id: str
 
     // validation for assigning issues
     const {title, description, assignedToUserId} = body
+
     if(assignedToUserId){
         const validId = prisma.user.findUnique({
             where: {
