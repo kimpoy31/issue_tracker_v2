@@ -8,34 +8,30 @@ import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios'
 
 const AsigneeSelectBtn = ({issue}:{issue:Issue}) => {
-  const {data: users, error, isLoading } = useQuery<User[]>({
-    queryKey: ["users"],
-    queryFn: () => axios.get("/api/users").then(res => res.data),
-    staleTime: 60 * 1000,
-    retry: 3,
-  })
+  const {data: users, error, isLoading } = useUsers();
 
   if(isLoading) return <Skeleton height={"2rem"}/>
   if(error) return null
 
+  const assignIssue = async(userId: string) => {
+    try{
+
+      const assignedToUserId = userId === "unassigned" ? null : userId
+      await axios.patch(`/api/issues/${issue.id}`, { assignedToUserId })
+      toast.success(userId === "unassigned" ? "Issue unassigned successfully!" : "Issue assigned successfully!")
+
+    } catch (error) {
+
+      toast.error("Issue not assigned")
+
+    }
+  }
+
   return (
     <>
       <Select.Root 
-      onValueChange={async(userId) => {
-        try{
-
-          const assignedToUserId = userId === "unassigned" ? null : userId
-          await axios.patch(`/api/issues/${issue.id}`, { assignedToUserId })
-          toast.success(userId === "unassigned" ? "Issue unassigned successfully!" : "Issue assigned successfully!")
-
-        } catch (error) {
-
-          toast.error("Issue not assigned")
-
-        }
-      }}
-      defaultValue={issue.assignedToUserId || ""}
-      >
+      onValueChange={(userId) => assignIssue(userId)}
+      defaultValue={issue.assignedToUserId || ""}>
           <Select.Trigger placeholder='Select Asignee...'/>
           <Select.Content>
               <Select.Group>
@@ -54,5 +50,12 @@ const AsigneeSelectBtn = ({issue}:{issue:Issue}) => {
     </>
   )
 }
+
+const useUsers = () => useQuery<User[]>({
+  queryKey: ["users"],
+  queryFn: () => axios.get("/api/users").then(res => res.data),
+  staleTime: 60 * 1000,
+  retry: 3,
+})
 
 export default AsigneeSelectBtn
