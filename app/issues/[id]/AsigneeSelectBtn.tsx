@@ -4,6 +4,7 @@ import { Issue, User } from '@prisma/client'
 import { Avatar, Select } from '@radix-ui/themes'
 import { Skeleton } from "@/app/components/index"
 import { useQuery } from '@tanstack/react-query'
+import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios'
 
 const AsigneeSelectBtn = ({issue}:{issue:Issue}) => {
@@ -18,26 +19,39 @@ const AsigneeSelectBtn = ({issue}:{issue:Issue}) => {
   if(error) return null
 
   return (
-    <Select.Root 
-    onValueChange={(userId) => {
-      const assignedToUserId = userId === "unassigned" ? null : userId
-      axios.patch(`/api/issues/${issue.id}`, { assignedToUserId })
-    }}
-    defaultValue={issue.assignedToUserId || ""}
-    >
-        <Select.Trigger placeholder='Select Asignee...'/>
-        <Select.Content>
-            <Select.Group>
-              <Select.Label>Users</Select.Label>
-              <Select.Item value='unassigned'>Unassigned</Select.Item>
-              {users?.map(user => 
-                <Select.Item key={user.id} value={user.id}>
-                  <Avatar src={user.image!} fallback="?" size={"1"} radius='full' />{" "}{user.name}
-                </Select.Item>  
-              )}
-            </Select.Group>
-        </Select.Content>
-    </Select.Root>
+    <>
+      <Select.Root 
+      onValueChange={async(userId) => {
+        try{
+
+          const assignedToUserId = userId === "unassigned" ? null : userId
+          await axios.patch(`/api/issues/${issue.id}`, { assignedToUserId })
+          toast.success(userId === "unassigned" ? "Issue unassigned successfully!" : "Issue assigned successfully!")
+
+        } catch (error) {
+
+          toast.error("Issue not assigned")
+
+        }
+      }}
+      defaultValue={issue.assignedToUserId || ""}
+      >
+          <Select.Trigger placeholder='Select Asignee...'/>
+          <Select.Content>
+              <Select.Group>
+                <Select.Label>Users</Select.Label>
+                <Select.Item value='unassigned'>Unassigned</Select.Item>
+                {users?.map(user => 
+                  <Select.Item key={user.id} value={user.id}>
+                    <Avatar src={user.image!} fallback="?" size={"1"} radius='full' />{" "}{user.name}
+                  </Select.Item>  
+                )}
+              </Select.Group>
+          </Select.Content>
+      </Select.Root>
+
+      <Toaster />
+    </>
   )
 }
 
