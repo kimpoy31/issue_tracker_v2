@@ -1,4 +1,4 @@
-import { IssueTypeSchema } from "@/app/issues/IssueType";
+import { IssueTypeSchema } from "@/app/issues/validationSchemas";
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/client";
 import { getServerSession } from "next-auth";

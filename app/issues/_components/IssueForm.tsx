@@ -13,7 +13,7 @@ import "easymde/dist/easymde.min.css";
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, Controller } from 'react-hook-form';
-import { IssueTypeSchema } from '../IssueType';
+import { IssueTypeSchema } from '../validationSchemas';
 
 // API imports
 import axios, { AxiosError } from 'axios';
