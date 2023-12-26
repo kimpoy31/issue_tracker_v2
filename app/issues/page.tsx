@@ -5,9 +5,9 @@ import { FaPlus } from "react-icons/fa6";
 import prisma from '@/prisma/client';
 import IssueTable from './IssueTable';
 import IssueStatusFilter from './IssueStatusFilter';
-import { Status } from '@prisma/client';
+import { Issue, Status } from '@prisma/client';
 
-const IssuesPage = async({searchParams}: {searchParams: { status: Status }}) => {
+const IssuesPage = async({searchParams}: {searchParams: { status: Status, orderBy: keyof Issue }}) => {
   const statuses = Object.values(Status)
   const status = statuses.includes(searchParams.status)
   ? searchParams.status
@@ -28,7 +28,7 @@ const IssuesPage = async({searchParams}: {searchParams: { status: Status }}) => 
           </Link>
         </Flex>
 
-        <IssueTable issues={issues}/>
+        <IssueTable searchParams={searchParams} issues={issues}/>
     </div>
   )
 }
