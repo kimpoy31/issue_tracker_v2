@@ -35,8 +35,7 @@ const AsigneeSelectBtn = ({issue}:{issue:Issue}) => {
           <Select.Trigger placeholder='Select Asignee...'/>
           <Select.Content position="popper">
               <Select.Group>
-                <Select.Label>Users</Select.Label>
-                <Select.Item value='unassigned'>Unassigned</Select.Item>
+                <Select.Item value='unassigned' >-- Unassigned --</Select.Item>
                 {users?.map(user => 
                   <Select.Item key={user.id} value={user.id}>
                     <Avatar src={user.image!} fallback="?" size={"1"} radius='full' />{" "}{user.name}
