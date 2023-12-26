@@ -8,16 +8,10 @@ import { BiSolidUpArrowAlt } from "react-icons/bi";
 interface Props {
   issues: Issue[];
   searchParams: { status: Status, orderBy: keyof Issue };
+  columns : {label: string, value: keyof Issue, className: string  }[];
 }
 
-const IssueTable = ({issues,searchParams}:Props) => {
-
-  const columns : {label: string, value: keyof Issue, className: string  }[] = [
-    {label: "Title" , value: "title", className: "cursor-pointer"},
-    {label: "Status" , value: "status", className: "hidden md:table-cell cursor-pointer"},
-    {label: "Created At" , value: "createdAt", className: 'hidden md:table-cell cursor-pointer'},
-  ]
-
+const IssueTable = ({issues,searchParams,columns}:Props) => {
   return (
       <Table.Root variant="surface">
         <Table.Header>

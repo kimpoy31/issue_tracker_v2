@@ -8,15 +8,26 @@ import IssueStatusFilter from './IssueStatusFilter';
 import { Issue, Status } from '@prisma/client';
 
 const IssuesPage = async({searchParams}: {searchParams: { status: Status, orderBy: keyof Issue }}) => {
+  const columns : {label: string, value: keyof Issue, className: string  }[] = [
+    {label: "Title" , value: "title", className: "cursor-pointer"},
+    {label: "Status" , value: "status", className: "hidden md:table-cell cursor-pointer"},
+    {label: "Created At" , value: "createdAt", className: 'hidden md:table-cell cursor-pointer'},
+  ]
+
   const statuses = Object.values(Status)
   const status = statuses.includes(searchParams.status)
   ? searchParams.status
   : undefined
 
+  const orderBy = columns.map(column => column.value).includes(searchParams.orderBy)
+  ? {[searchParams.orderBy]: "asc"}
+  : undefined
+
   const issues = await prisma.issue.findMany({
     where: {
-      status
-    }
+      status,
+    },
+    orderBy: orderBy
   })
 
   return (
@@ -28,7 +39,7 @@ const IssuesPage = async({searchParams}: {searchParams: { status: Status, orderB
           </Link>
         </Flex>
 
-        <IssueTable searchParams={searchParams} issues={issues}/>
+        <IssueTable searchParams={searchParams} issues={issues} columns={columns} />
     </div>
   )
 }

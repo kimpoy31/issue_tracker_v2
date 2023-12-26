@@ -17,7 +17,7 @@ const IssueStatusFilter = () => {
   return (
     <Select.Root onValueChange={(status) => {
       const query = status === "ALL" ? "" : `?status=${status}`
-      router.push("/issues/" + query)
+      router.push("/issues" + query)
     }}>
         <Select.Trigger placeholder="Filter" />
         <Select.Content position="popper">
