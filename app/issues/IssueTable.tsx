@@ -1,17 +1,21 @@
-"use client"
 import { Flex, Table } from '@radix-ui/themes'
 import StatusBadge from './_components/Badge'
 import Link from 'next/link'
 import { Issue, Status } from '@prisma/client'
 import { BiSolidUpArrowAlt } from "react-icons/bi";
 
-interface Props {
-  issues: Issue[];
-  searchParams: { status: Status, orderBy: keyof Issue };
-  columns : {label: string, value: keyof Issue, className: string  }[];
+export interface IssueQuery{
+  status: Status, 
+  orderBy: keyof Issue, 
+  page:string 
 }
 
-const IssueTable = ({issues,searchParams,columns}:Props) => {
+interface Props {
+  issues: Issue[];
+  searchParams: IssueQuery;
+}
+
+const IssueTable = ({issues,searchParams}:Props) => {
   return (
       <Table.Root variant="surface">
         <Table.Header>
@@ -45,8 +49,15 @@ const IssueTable = ({issues,searchParams,columns}:Props) => {
         )}
         </Table.Body>
       </Table.Root>
-
   )
 }
+
+const columns : {label: string, value: keyof Issue, className: string  }[] = [
+  {label: "Title" , value: "title", className: "cursor-pointer"},
+  {label: "Status" , value: "status", className: "hidden md:table-cell cursor-pointer"},
+  {label: "Created At" , value: "createdAt", className: 'hidden md:table-cell cursor-pointer'},
+]
+
+export const columnNames = columns.map(column => column.value)
 
 export default IssueTable

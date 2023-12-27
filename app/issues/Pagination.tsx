@@ -1,5 +1,5 @@
 "use client"
-import { Button, Flex, Text } from '@radix-ui/themes'
+import { Button, Container, Flex, Text } from '@radix-ui/themes'
 import { useRouter, useSearchParams } from 'next/navigation';
 import React from 'react'
 import { FaAngleLeft, FaAngleRight, FaAnglesLeft, FaAnglesRight } from "react-icons/fa6";
@@ -24,7 +24,7 @@ const Pagination = ({itemCount, currentPage, pageSize}: Props) => {
     }
 
   return (
-    <Flex align={"center"} gap={"2"}>
+    <Flex width={'100%'} justify={{initial:"center", md:"start"}} align={"center"} gap={"2"}>
         {/* LeftButtons */}
         <Button 
             variant='outline'

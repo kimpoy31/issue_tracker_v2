@@ -1,35 +1,24 @@
-import { Button, Flex } from '@radix-ui/themes'
-import Link from 'next/link'
 import React from 'react'
-import { FaPlus } from "react-icons/fa6";
 import prisma from '@/prisma/client';
-import IssueTable from './IssueTable';
-import IssueStatusFilter from './IssueStatusFilter';
+import IssueTable, { IssueQuery, columnNames } from './IssueTable';
 import { Issue, Status } from '@prisma/client';
 import Pagination from './Pagination';
+import TableActions from './TableActions';
+import { Flex } from '@radix-ui/themes';
 
 interface Props{
-  searchParams: { 
-    status: Status, 
-    orderBy: keyof Issue, 
-    page:string 
-  },
+  searchParams: IssueQuery
 }
 
 const IssuesPage = async({searchParams}: Props) => {
-  const columns : {label: string, value: keyof Issue, className: string  }[] = [
-    {label: "Title" , value: "title", className: "cursor-pointer"},
-    {label: "Status" , value: "status", className: "hidden md:table-cell cursor-pointer"},
-    {label: "Created At" , value: "createdAt", className: 'hidden md:table-cell cursor-pointer'},
-  ]
-
   const statuses = Object.values(Status)
   const status = statuses.includes(searchParams.status)
   ? searchParams.status
   : undefined
   const where = { status }
 
-  const orderBy = columns.map(column => column.value).includes(searchParams.orderBy)
+  const orderBy = columnNames
+  .includes(searchParams.orderBy)
   ? {[searchParams.orderBy]: "asc"}
   : undefined
 
@@ -46,17 +35,11 @@ const IssuesPage = async({searchParams}: Props) => {
   const issueCount = await prisma.issue.count({ where })
 
   return (
-    <div className='flex flex-col gap-2'>
-        <Flex justify={"between"}>
-          <IssueStatusFilter />
-          <Link href={"/issues/new"}>
-              <Button> <FaPlus/> New Issue</Button>
-          </Link>
-        </Flex>
-
-        <IssueTable searchParams={searchParams} issues={issues} columns={columns} />
+    <Flex direction={"column"} gap={"3"}>
+        <TableActions />
+        <IssueTable searchParams={searchParams} issues={issues}/>
         <Pagination itemCount={issueCount} pageSize={pageSize} currentPage={page}/>
-    </div>
+    </Flex>
   )
 }
 
