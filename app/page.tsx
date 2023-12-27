@@ -2,6 +2,7 @@ import prisma from "@/prisma/client";
 // Components
 import IssueSummary from "./IssueSummary";
 import LatestIssues from "./LatestIssues";
+import Barchart from "./Barchart";
 
 const Home = async () => {
   const open = await prisma.issue.count({
@@ -16,6 +17,7 @@ const Home = async () => {
 
   return (
     <div>
+      <Barchart open={open} inProgress={inProgress} closed={closed} />
       <IssueSummary open={open} inProgress={inProgress} closed={closed} />
       <LatestIssues />
     </div>
