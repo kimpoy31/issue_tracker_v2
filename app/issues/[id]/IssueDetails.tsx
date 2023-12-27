@@ -1,6 +1,6 @@
 import { Flex, Text } from '@radix-ui/themes'
 import React from 'react'
-import StatusBadge from '../_components/Badge'
+import StatusBadge from '../../components/Badge'
 import Markdown from 'react-markdown'
 import { Issue } from '@prisma/client'
 

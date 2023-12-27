@@ -1,5 +1,5 @@
 import { Flex, Table } from '@radix-ui/themes'
-import StatusBadge from './_components/Badge'
+import StatusBadge from '../components/Badge'
 import Link from 'next/link'
 import { Issue, Status } from '@prisma/client'
 import { BiSolidUpArrowAlt } from "react-icons/bi";

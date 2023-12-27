@@ -1,7 +1,9 @@
-export default function Home({searchParams}: {searchParams:{page:string}}) {
+import LatestIssues from "./LatestIssues";
+
+export default function Home() {
   return (
     <div>
-      
+      <LatestIssues />
     </div>
   )
 }
