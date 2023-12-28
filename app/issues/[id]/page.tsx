@@ -5,7 +5,7 @@ import prisma from '@/prisma/client'
 import authOptions from '@/app/auth/authOptions'
 import { getServerSession } from 'next-auth'
 // Radixui imports
-import { Box, Button, Container, Flex, Grid, Text } from '@radix-ui/themes'
+import { Box, Flex, Grid } from '@radix-ui/themes'
 // Components
 import AsigneeSelectBtn from './AsigneeSelectBtn'
 import IssueDetails from './IssueDetails'
@@ -43,3 +43,12 @@ const DetailsPage = async({ params }:{ params: { id: string } }) => {
 }
 
 export default DetailsPage
+
+export async function generateMetadata({params}: { params: { id: string } }){
+    const issue = await prisma.issue.findUnique({where: { id: parseInt(params.id) }})
+
+    return{
+        title: issue?.title,
+        description: "Details of issue " + issue?.id
+    }
+}

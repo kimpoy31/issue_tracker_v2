@@ -23,7 +23,7 @@ import Spinner from '@/app/components/Spinner';
 
 type IssueSchema = z.infer<typeof IssueTypeSchema>
 
-const IssueForm = ({issue} : {issue: Issue}) => {
+const IssueForm = ({issue} : {issue?: Issue}) => {
     const [error, setError] = useState("")
     const [isLoading, setIsLoading] = useState(false)
     const router = useRouter()
