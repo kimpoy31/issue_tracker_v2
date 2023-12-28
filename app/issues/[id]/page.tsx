@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import React from 'react'
+import React, { cache } from 'react'
 // auth imports
 import prisma from '@/prisma/client'
 import authOptions from '@/app/auth/authOptions'
@@ -12,8 +12,10 @@ import IssueDetails from './IssueDetails'
 import EditIssueButton from './EditIssueButton'
 import DeleteIssueButton from './DeleteIssueButton'
 
+const fetchUser = cache((id: number) => prisma.issue.findUnique({where: {id: id}}))
+
 const DetailsPage = async({ params }:{ params: { id: string } }) => {
-    const session = await getServerSession(authOptions)
+    const session = await fetchUser(parseInt(params.id))
 
     const issue = await prisma.issue.findUnique({
         where:{
@@ -45,7 +47,7 @@ const DetailsPage = async({ params }:{ params: { id: string } }) => {
 export default DetailsPage
 
 export async function generateMetadata({params}: { params: { id: string } }){
-    const issue = await prisma.issue.findUnique({where: { id: parseInt(params.id) }})
+    const issue = await fetchUser(parseInt(params.id))
 
     return{
         title: issue?.title,
