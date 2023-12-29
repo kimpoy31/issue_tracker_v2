@@ -6,7 +6,7 @@ import Barchart from "./Barchart";
 import { Flex, Grid } from "@radix-ui/themes";
 import { Metadata } from "next";
 
-const Home = async () => {
+export default async function Home() {
   const open = await prisma.issue.count({
     where: {status : 'OPEN'}
   })
@@ -27,8 +27,6 @@ const Home = async () => {
     </Grid>
   )
 }
-
-export default Home
 
 export const metadata: Metadata = {
   title:"Issue Tracker - Dashboard",
