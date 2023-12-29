@@ -28,6 +28,8 @@ const IssueForm = ({issue} : {issue?: Issue}) => {
     const [isLoading, setIsLoading] = useState(false)
     const router = useRouter()
 
+    console.log(isLoading)
+
     const { 
         register, 
         control, 
@@ -108,13 +110,8 @@ const IssueForm = ({issue} : {issue?: Issue}) => {
                 {errors.description.message}
             </ErrorMessage>
         }
-
-        {isLoading 
-        ? <Button disabled>{issue ? "Updating": "Submitting"}<Spinner /></Button>
-        : issue 
-            ? <Button type='submit'>Update Issue</Button> 
-            : <Button type='submit'>Submit Issue</Button>
-        }
+        
+        {isLoading ? <Button disabled>{issue ? "Updating": "Submitting"}<Spinner /></Button> : <Button>{issue ? "Update Issue" : "Submit Issue"}</Button>}
     </form>
   )
 }
