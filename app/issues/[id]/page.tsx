@@ -2,8 +2,6 @@ import { notFound } from 'next/navigation'
 import React, { cache } from 'react'
 // auth imports
 import prisma from '@/prisma/client'
-import authOptions from '@/app/auth/authOptions'
-import { getServerSession } from 'next-auth'
 // Radixui imports
 import { Box, Flex, Grid } from '@radix-ui/themes'
 // Components
